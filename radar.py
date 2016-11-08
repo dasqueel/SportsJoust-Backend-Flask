@@ -7,8 +7,8 @@ from config import *
 
 pp = pprint.PrettyPrinter(indent=4)
 
-nflkey = 'sdhss2v7kxhj8vqefcnb2b73'
-cfbkey = '5mubn7fjryjqs8uxa3ehw4y7'
+nflkey = 'secret'
+cfbkey = 'secret'
 
 schedUrl = 'http://api.sportradar.us/nfl-t1/2015/REG/1/schedule.json?api_key='+nflkey
 

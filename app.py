@@ -18,10 +18,10 @@ from parse_rest.installation import Push
 
 # create the application object
 app = Flask(__name__)
-app.secret_key = '\x1f\xb1A\x01\x95\x8d\xc5\xdb\xe6\xf9\xb5\xf1\x93\xa5\x86\x07\xb9\x89\xbci\x99\xaaz\x82'
+app.secret_key = 'crazy secret'
 
 #parse stuff
-register("IR5aGhW4MpLSVz4p4hXWXsc2uzbS7oDoThW35NJm", "mKkZGbWr7A0YK5lPhbhz6twjMOFFbxom9irPeSWt", master_key="fm63ozy74i7X2GcvXiGOuvJSq0tUkKjRldSJ83hw")
+register("secret", "secret", master_key="secret")
 
 ### Supporting funcs ###
 def login_required(test):
