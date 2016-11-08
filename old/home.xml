@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="&lt;username>"
+        android:id="@+id/userName"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_alignTop="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="32dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="&lt;balance>"
+        android:id="@+id/bal"
+        android:layout_marginRight="57dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="57dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Set/Edit Rankings"
+        android:id="@+id/setEdit"
+        android:layout_below="@+id/userName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:clickable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Find Matches"
+        android:id="@+id/findMatches"
+        android:layout_marginTop="69dp"
+        android:layout_below="@+id/setEdit"
+        android:layout_centerHorizontal="true"
+        android:clickable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Potential Matches"
+        android:id="@+id/potential"
+        android:layout_marginTop="69dp"
+        android:clickable="true"
+        android:layout_below="@+id/findMatches"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="My Contests"
+        android:id="@+id/myContests"
+        android:clickable="true"
+        android:layout_marginTop="69dp"
+        android:layout_below="@+id/potential"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

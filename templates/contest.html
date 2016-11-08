@@ -1,0 +1,25 @@
+{% extends "home.html" %}
+{% block content %}
+<div id='wrapper'>
+<div id='matchBox1'>
+<h1 id='userName'>Team {{session['userName']}}</h1>
+<p>QB: {{userTeam['qb'][0]['name']}}  --  {{userTeam['qb'][0]['opp']}}</p>
+<p>RB: {{userTeam['rb'][0]['name']}}  --  {{userTeam['rb'][0]['opp']}}</p>
+<p>RB: {{userTeam['rb'][1]['name']}}  --  {{userTeam['rb'][1]['opp']}}</p>
+<p>WR: {{userTeam['wr'][0]['name']}}  --  {{userTeam['wr'][0]['opp']}}</p>
+<p>WR: {{userTeam['wr'][1]['name']}}  --  {{userTeam['wr'][1]['opp']}}</p>
+<p>TE: {{userTeam['te'][0]['name']}}  --  {{userTeam['te'][0]['opp']}}</p>
+<p>DEF/ST: {{userTeam['defst'][0]['name']}}  --  {{userTeam['defst'][0]['opp']}}</p>
+</div>
+<div id='matchBox2'>
+<h1>Team {{opUserName}}</h1>
+<p>QB: {{opTeam['qb'][0]['name']}}  --  {{opTeam['qb'][0]['opp']}}</p>
+<p>RB: {{opTeam['rb'][0]['name']}}  --  {{opTeam['rb'][0]['opp']}}</p>
+<p>RB: {{opTeam['rb'][1]['name']}}  --  {{opTeam['rb'][1]['opp']}}</p>
+<p>WR: {{opTeam['wr'][0]['name']}}  --  {{opTeam['wr'][0]['opp']}}</p>
+<p>WR: {{opTeam['wr'][1]['name']}}  --  {{opTeam['wr'][1]['opp']}}</p>
+<p>TE: {{opTeam['te'][0]['name']}}  --  {{opTeam['te'][0]['opp']}}</p>
+<p>DEF/ST: {{opTeam['defst'][0]['name']}}  --  {{opTeam['defst'][0]['opp']}}</p>
+</div>
+</div>
+{% endblock %}

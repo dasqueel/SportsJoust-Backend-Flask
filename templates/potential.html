@@ -1,0 +1,26 @@
+{% extends "home.html" %}
+{% block content %}
+
+<table class='matchups'>
+<tr>
+	<td>Contest</td>
+	<td>Opponent</td>
+	<td>Current Wager</td>
+</tr>
+
+{% for match in matches %}
+<tr>
+	<td>NFL Week 1</td>
+	<td>{% if session['userName'] == match['team1user'] %}
+		{{match['team2user']}}
+		{% else %}
+		{{match['team1user']}}
+		{% endif %}
+	</td>
+	<td>${{match['wager']}}</td>
+	<td><a href="potential_contest?matchId={{match['matchId']}}">view</a></td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

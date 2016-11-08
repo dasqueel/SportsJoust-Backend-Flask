@@ -1,0 +1,49 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<button id='post' name='post' value='post'>post</button>
+<button id='post2' name='post2' value='post2'>post2</button>
+<button id='get' value ='get'>get</button>
+
+<script type="text/javascript">
+//send lineups to server
+$('#post').click(function(){
+	$.ajax({
+	  type: "POST",
+	  contentType: "application/json; charset=utf-8",
+	  url: "buttonBack",
+	  data: JSON.stringify({'type': 'post1'}),
+	  dataType: "json",
+	  success: function(){
+	  	window.location.href = "teams";
+	  }
+	});
+})
+
+$('#post2').click(function(){
+	$.ajax({
+	  type: "POST",
+	  contentType: "application/json; charset=utf-8",
+	  url: "buttonBack",
+	  data: JSON.stringify({'type': 'post2'}),
+	  dataType: "json",
+	  success: function(){
+	  	window.location.href = "teams";
+	  }
+	});
+})
+
+$('#get').click(function(){
+	$.ajax({
+	  type: "GET",
+	  contentType: "application/json; charset=utf-8",
+	  url: "buttonBack",
+	  data: JSON.stringify({'type': 'get'}),
+	  dataType: "json",
+	  success: function(){
+	  	window.location.href = "teams";
+	  }
+	});
+})
+
+
+</script>

@@ -1,0 +1,144 @@
+body {
+    background-color: #E3E1D8;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 13;
+}
+
+
+.sort{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  float:left;
+}
+.sort li{
+  margin: 0 3px 3px 3px;
+  padding: 0.4em;
+  padding-left: 0.5em;
+  font-size: 13px;
+  height: 16px;
+  width: 200px;
+}
+
+/* table stuff */
+td {
+  padding: 8px;
+}
+
+#highlight:nth-child(1) {
+     border-top-style: solid;
+     border-right-style: solid;
+     border-left-style: solid;
+     border-top-width: 5px;
+     border-right-width: 5px;
+     border-left-width: 5px;
+ }
+
+#highlight6:nth-child(-n+6){
+    border-style: solid;
+    border-width: 2px;
+}
+#highlight12:nth-child(-n+12){
+    border-style: solid;
+    border-width: 2px;
+}
+
+#postLU {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.default {
+   background: #cedc98;
+   border: #FF8585;
+   color: #333333;
+}
+.vert {
+	display:inline-block;
+	width: 230px;
+}
+
+#wager {
+  width: 110px;
+  margin-right: 5px;
+}
+
+#matchBox1 {
+    background-color:#eeeeee;
+    height:290px;
+    width: 340px;
+    padding:5px;
+    display: inline-block;
+
+}
+#matchBox2 {
+    background-color:#eeeeee;
+    height:290px;
+    width: 340px;
+    padding:5px;
+    display: inline-block;
+
+}
+
+.nav{
+    border:1px solid #ccc;
+    border-width:1px 0;
+    list-style:none;
+    margin:0;
+    padding:0;
+    text-align:center;
+    background-color: #D9DEDB;
+}
+.nav li{
+    display:inline;
+}
+.nav a{
+    display:inline-block;
+    padding:10px;
+    color:#0F6EA6;
+}
+.nav a:visited {
+  color:#0F6EA6
+}
+
+#right {
+  float:right;
+}
+
+/* potential stuff */
+#accept {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.matchups td {
+  padding-right: 15px;
+}
+
+.matchups tr {
+  padding-bottom: 8px;
+}
+
+.center2 {
+  position: relative;
+  text-align: center;
+}
+
+#week {
+  text-align: center;
+}
+
+#waitingOn {
+  position: relative;;
+}
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+#wrapper {
+    width: 60%;
+    margin: 0 auto;
+}

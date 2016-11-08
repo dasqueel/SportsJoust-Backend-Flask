@@ -1,0 +1,93 @@
+{% extends "home.html" %}
+{% block content %}
+<head>
+	<title>Fantasy Smash</title>
+	<link rel="stylesheet" type="text/css" href="static/css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+</head>
+
+
+
+<body>
+	<h1 id='week'>{{week}}</h1><br>
+
+	<div><button id='postLu'>Set Lineup</button></div>
+
+	<div class='vert'>
+	<h1>QB:</h1>
+	<ul class="sort" id="qb">
+		{% for qb in rankings['qbr'] %}
+		<li value='{{qb["name"]}}' class='default' id='highlight6'>{{qb['name']}} -- {{qb['opp']}}</li>
+		{% endfor %}
+	</ul>
+	</div>
+	<div class='vert'>
+	<h1>RB:</h1>
+	<ul class="sort" id="rb">
+		{% for rb in rankings['rbr'] %}
+		<li value='{{rb["name"]}}' class='default' id="highlight12">{{rb['name']}} --  {{rb['opp']}}</li>
+		{% endfor %}
+	</ul>
+	</div>
+	<div class='vert'>
+	<h1>WR:</h1>
+	<ul class="sort" id="wr">
+		{% for wr in rankings['wrr'] %}
+		<li value='{{wr["name"]}}' class='default' id="highlight12">{{wr['name']}} --  {{wr['opp']}}</li>
+		{% endfor %}
+	</ul>
+	</div>
+	<div class='vert'>
+	<h1>TE:</h1>
+	<ul class="sort" id="te">
+		{% for te in rankings['ter'] %}
+		<li value='{{te["name"]}}' class='default' id='highlight6'>{{te['name']}} --  {{te['opp']}}</li>
+		{% endfor %}
+	</ul>
+	</div>
+	<div class='vert'>
+	<h1>DEF/ST:</h1>
+	<ul class="sort" id="defst">
+		{% for defst in rankings['defstr'] %}
+		<li value='{{defst["name"]}}' class='default' id='highlight6'>{{defst['name']}} --  {{defst['opp']}}</li>
+		{% endfor %}
+	</ul>
+	</div>
+	<br>
+</body>
+
+<script>
+
+function getQb(){var order = $("#qb").sortable('toArray', {attribute: 'value'});return order;}
+function getRb(){var order = $("#rb").sortable('toArray', {attribute: 'value'});return order;}
+function getWr(){var order = $("#wr").sortable('toArray', {attribute: 'value'});return order;}
+function getTe(){var order = $("#te").sortable('toArray', {attribute: 'value'});return order;}
+function getDefst(){var order = $("#defst").sortable('toArray', {attribute: 'value'});return order;}
+
+$('#qb').sortable({update: function(event, ui) {var qb = $(this).sortable('toArray', {attribute: 'value'});qbr = qb;}});
+$('#rb').sortable({update: function(event, ui) {var rb = $(this).sortable('toArray', {attribute: 'value'});rbr = rb;}});
+$('#wr').sortable({update: function(event, ui) {var wr = $(this).sortable('toArray', {attribute: 'value'});wrr = wr;}});
+$('#te').sortable({update: function(event, ui) {var te = $(this).sortable('toArray', {attribute: 'value'});ter = te;}});
+$('#defst').sortable({update: function(event, ui) {var defst = $(this).sortable('toArray', {attribute: 'value'});defstr = defst;}});
+
+//send lineups to server
+$('#postLu').click(function(){
+	var qbr = getQb();
+	var rbr = getRb();
+	var wrr = getWr();
+	var ter = getTe();
+	var defstr = getDefst();
+	var data = { 'qbr':qbr, 'rbr':rbr, 'wrr':wrr, 'ter':ter,'defstr':defstr};
+	$.ajax({
+	    url: "setRankings",
+	    type: "POST",
+	    data: JSON.stringify(data),
+	    contentType: "application/json; charset=utf-8",
+	    success: function() { window.location.href = '/'; }
+	});
+})
+</script>
+</html>
+{% endblock %}

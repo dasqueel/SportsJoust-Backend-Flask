@@ -1,0 +1,42 @@
+<html>
+<link rel="stylesheet" type="text/css" href="static/css/style.css">
+{% if error %}
+{{error}}
+{% endif %}
+
+<table width="300" align="center" cellpadding="0" cellspacing="1">
+
+<tr>
+<form name="register" method="post" action="login">
+<td>
+
+<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
+
+<tr>
+<td colspan="3"><strong><center>Fantasy Smash Login</center></strong></td>
+</tr>
+
+<tr>
+<td width="78">User Name</td>
+<td width="6">:</td>
+<td width="294"><input name="userName" type="text" id="userName"></td>
+</tr>
+
+<tr>
+<td>Password</td>
+<td>:</td>
+<td><input name="pwd" type="password" id="pwd"></td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td><input type="submit" name="submit" value="login"></td>
+</tr>
+<a href="register">Register</a>
+
+</table>
+</td>
+</form>
+</tr>
+</table>

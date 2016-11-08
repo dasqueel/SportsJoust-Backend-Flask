@@ -1,0 +1,21 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="static/css/style.css">
+	<title>{{session['userName']}}'s Smash</title>
+</head>
+<ul class="nav">
+  <li><a href="rankings">Set/Edit Rankings</a></li>
+  <li><a href="matchups">Find Matchups</a></li>
+  <li><a href="potential">Potential Matchups</a></li>
+  <li><a href="current">Current Matchups</a></li>
+  <li><a href="logout">Log Out</a></li>
+  <li id='right'><a href='/account'>{{session['userName']}}</a></li>
+  <div id='right'><p>Balance: ${{session['balance']}}</p><div>
+</ul>
+<body>
+
+</body>
+<br>
+<br>
+{% block content %}{% endblock %}
+</html>

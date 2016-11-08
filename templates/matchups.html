@@ -1,0 +1,97 @@
+{% extends "home.html" %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+{% if error %}
+{{ error }}
+{% endif %}
+{% if userTeam %}
+<div id='wrapper'>
+<div id='matchBox1'>
+<h1 id='userName'>Team {{session['userName']}}</h1>
+<p>QB: {{userTeam['qb'][0]['name']}}  --  {{userTeam['qb'][0]['opp']}}</p>
+<p>RB: {{userTeam['rb'][0]['name']}}  --  {{userTeam['rb'][0]['opp']}}</p>
+<p>RB: {{userTeam['rb'][1]['name']}}  --  {{userTeam['rb'][1]['opp']}}</p>
+<p>WR: {{userTeam['wr'][0]['name']}}  --  {{userTeam['wr'][0]['opp']}}</p>
+<p>WR: {{userTeam['wr'][1]['name']}}  --  {{userTeam['wr'][1]['opp']}}</p>
+<p>TE: {{userTeam['te'][0]['name']}}  --  {{userTeam['te'][0]['opp']}}</p>
+<p>DEF/ST: {{userTeam['defst'][0]['name']}}  --  {{userTeam['defst'][0]['opp']}}</p>
+</div>
+{% endif %}
+{% if opTeam %}
+{% if opUserName %}
+<div id='matchBox2'>
+<h1>Team {{opUserName}}</h1>
+<p>QB: {{opTeam['qb'][0]['name']}}  --  {{opTeam['qb'][0]['opp']}}</p>
+<p>RB: {{opTeam['rb'][0]['name']}}  --  {{opTeam['rb'][0]['opp']}}</p>
+<p>RB: {{opTeam['rb'][1]['name']}}  --  {{opTeam['rb'][1]['opp']}}</p>
+<p>WR: {{opTeam['wr'][0]['name']}}  --  {{opTeam['wr'][0]['opp']}}</p>
+<p>WR: {{opTeam['wr'][1]['name']}}  --  {{opTeam['wr'][1]['opp']}}</p>
+<p>TE: {{opTeam['te'][0]['name']}}  --  {{opTeam['te'][0]['opp']}}</p>
+<p>DEF/ST: {{opTeam['defst'][0]['name']}}  --  {{opTeam['defst'][0]['opp']}}</p>
+</div>
+</div>
+{% if match != True %}
+<br>
+<br>
+<div class='center2'>
+<button id='accept'>Accept</button>
+<button id='reject'>Reject</button>
+</div>
+{% endif %}
+{% endif %}
+{% endif %}
+
+<div id='waitingOn'></div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{
+  url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+
+<script type=text/javascript>
+$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+
+<script>
+var matchId = null;
+
+$('#accept').bind('click', function() {
+	$.getJSON($SCRIPT_ROOT + '/acceptBack', {
+		outcome: 'accept'
+	}, function(data) {
+		if (data.match == true) {
+			window.matchId = data.matchId;
+			$('#accept').remove();
+			$('#reject').remove();
+			$("#waitingOn").html("<p>Team {{session['opUserName']}} thinks they will bea Team {{userName}}</p><input name='wager' type='text' id='wager' placeholder='max wager: $"+data.maxWager+"'><button id='wagerRequest'>Send Wager Request</button>");
+		}
+		else {
+			window.location.href = 'matchups';
+		}
+	});
+	return false;
+});
+
+$('#reject').click(function(){
+	$.ajax({
+	    url: "matchups",
+	    type: "POST",
+	    data: {outcome:'rejected'},
+	    success: function() {
+	    	window.location.href = 'matchups';
+	    }
+	});
+})
+
+$('#waitingOn').on('click', '#wagerRequest', function() {
+  $.ajax({
+      url: "matchBack",
+      type: "POST",
+      data: {wager:$('#wager').val(),matchId:window.matchId},
+      success: function() {
+      	window.location.href = 'matchups';
+      }
+  })
+});
+
+</script>
+{% endblock %}

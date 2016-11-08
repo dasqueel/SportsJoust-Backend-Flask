@@ -1,0 +1,76 @@
+{% extends "home.html" %}
+{% block content %}
+<div id='wrapper'>
+<div id='matchBox1'>
+<h1 id='userName'>Team {{session['userName']}}</h1>
+<p>QB: {{userTeam['qb'][0]['name']}}  --  {{userTeam['qb'][0]['opp']}}</p>
+<p>RB: {{userTeam['rb'][0]['name']}}  --  {{userTeam['rb'][0]['opp']}}</p>
+<p>RB: {{userTeam['rb'][1]['name']}}  --  {{userTeam['rb'][1]['opp']}}</p>
+<p>WR: {{userTeam['wr'][0]['name']}}  --  {{userTeam['wr'][0]['opp']}}</p>
+<p>WR: {{userTeam['wr'][1]['name']}}  --  {{userTeam['wr'][1]['opp']}}</p>
+<p>TE: {{userTeam['te'][0]['name']}}  --  {{userTeam['te'][0]['opp']}}</p>
+<p>DEF/ST: {{userTeam['defst'][0]['name']}}  --  {{userTeam['defst'][0]['opp']}}</p>
+</div>
+<div id='matchBox2'>
+<h1>Team {{opUserName}}</h1>
+<p>QB: {{opTeam['qb'][0]['name']}}  --  {{opTeam['qb'][0]['opp']}}</p>
+<p>RB: {{opTeam['rb'][0]['name']}}  --  {{opTeam['rb'][0]['opp']}}</p>
+<p>RB: {{opTeam['rb'][1]['name']}}  --  {{opTeam['rb'][1]['opp']}}</p>
+<p>WR: {{opTeam['wr'][0]['name']}}  --  {{opTeam['wr'][0]['opp']}}</p>
+<p>WR: {{opTeam['wr'][1]['name']}}  --  {{opTeam['wr'][1]['opp']}}</p>
+<p>TE: {{opTeam['te'][0]['name']}}  --  {{opTeam['te'][0]['opp']}}</p>
+<p>DEF/ST: {{opTeam['defst'][0]['name']}}  --  {{opTeam['defst'][0]['opp']}}</p>
+</div>
+<div id='waitingOn'></div>
+{% if match['turn'] == session['userName'] %}
+<div id='currentStuff'><p id='accept'>Current wager: ${{match['wager']}}</p><button id='acceptWager'>Accept Wager</button></div>
+<input name='wager' type='text' id='wager'><button id='wagerRequest'>Send Counter Wager</button>
+{% else %}
+<div><p id='accept'>Current wager: ${{match['wager']}}</p><p>Waiting on team {{opUserName}}</p></div>
+</div>
+{% endif %}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{
+  url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+
+<script type=text/javascript>
+$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+
+<script>
+$('#wagerRequest').bind('click', function() {
+	$.getJSON($SCRIPT_ROOT + '/wagerBack',
+	{wager:$('#wager').val()}, function(data) {
+		$('#wagerRequest').remove();
+		$('#wager').remove();
+		$('#currentStuff').remove();
+        $('#waitingOn').html('<p id="accept">Current wager: '+data.wager+'</p><p>Waiting on team {{opUserName}}</p>');
+    });
+	return false;
+});
+
+$('#acceptWager').click(function(){
+	var matchId = "{{match['matchId']}}";
+	$.ajax({
+	    url: "finalize",
+	    type: "GET",
+	    data: {matchId:matchId},
+        success: function(data) {
+        	if (data.funds == true) {
+        		$('#wagerRequest').remove();
+        		$('#wager').remove();
+        		$('#currentStuff').remove();
+        		$('#waitingOn').html("<p>Match Made!</p><a href='contest?matchId={{match['matchId']}}'>Go to Match</a>");
+        	}
+        	else {
+        		$('#wagerRequest').remove();
+        		$('#wager').remove();
+        		$('#currentStuff').remove();
+        		$('#waitingOn').html("Other team has insufficient funds for wager.");
+        	}
+        }
+	})
+})
+</script>
+{% endblock %}

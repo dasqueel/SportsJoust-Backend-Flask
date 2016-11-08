@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<head>
+	<title>Fantasy Smash</title>
+	<link rel="stylesheet" type="text/css" href="static/css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="static/js/data.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+</head>
+<body>
+	<div class='vert'>
+	<h1>QB:</h1>
+	<ul class="sort" id="qb"></ul>
+	</div>
+	<div class='vert'>
+	<h1>RB:</h1>
+	<ul class="sort" id="rb"></ul>
+	</div>
+	<div class='vert'>
+	<h1>WR:</h1>
+	<ul class="sort" id="wr"></ul>
+	</div>
+	<div class='vert'>
+	<h1>TE:</h1>
+	<ul class="sort" id="te"></ul>
+	</div>
+	<div class='vert'>
+	<h1>Def:</h1>
+	<ul class="sort" id="def"></ul>
+	</div>
+	<br>
+</body>
+
+<button id='postLu'>Set Lineup</button>
+
+<script>
+
+$.each(qbs, function(k,v){$('#qb').append("<li value='"+v+"' class='default'>"+v+"</li>")})
+$.each(rbs, function(k,v){$('#rb').append("<li value='"+v+"' class='default'>"+v+"</li>")})
+$.each(wrs, function(k,v){$('#wr').append("<li value='"+v+"' class='default'>"+v+"</li>")})
+$.each(tes, function(k,v){$('#te').append("<li value='"+v+"' class='default'>"+v+"</li>")})
+$.each(def, function(k,v){$('#def').append("<li value='"+v+"' class='default'>"+v+"</li>")})
+
+//var x = $('#qb').sortable('toArray', {attribute: 'value'});
+function getQb(){var order = $("#qb").sortable('toArray', {attribute: 'value'});return order;}
+function getRb(){var order = $("#rb").sortable('toArray', {attribute: 'value'});return order;}
+function getWr(){var order = $("#wr").sortable('toArray', {attribute: 'value'});return order;}
+function getTe(){var order = $("#te").sortable('toArray', {attribute: 'value'});return order;}
+function getDef(){var order = $("#def").sortable('toArray', {attribute: 'value'});return order;}
+
+//var qbr = null;
+var qbr = qbs;
+var rbr = rbs;
+var wrr = wrs;
+var ter = tes;
+var defr = def;
+
+$('#qb').sortable({update: function(event, ui) {var qb = $(this).sortable('toArray', {attribute: 'value'});qbr = qb;}});
+$('#rb').sortable({update: function(event, ui) {var rb = $(this).sortable('toArray', {attribute: 'value'});rbr = rb;}});
+$('#wr').sortable({update: function(event, ui) {var wr = $(this).sortable('toArray', {attribute: 'value'});wrr = wr;}});
+$('#te').sortable({update: function(event, ui) {var te = $(this).sortable('toArray', {attribute: 'value'});ter = te;}});
+$('#def').sortable({update: function(event, ui) {var def = $(this).sortable('toArray', {attribute: 'value'});defr = def;}});
+
+//send lineups to server
+$('#postLu').click(function(){
+	var data = { 'qbr':qbr, 'rbr':rbr, 'wrr':wrr, 'ter':ter,'defr':defr};
+	//$.post( "back", { 'qbr[]':qbr,} );
+	$.ajax({
+	    url: "lineup",
+	    type: "POST",
+	    data: JSON.stringify(data),
+	    contentType: "application/json; charset=utf-8",
+	    success: function() { window.location.href = 'home'; }
+	});
+	//console.log(x);
+	//$.post( "back", {'qbr':qbr,'rbr':rbr,'wrr':wrr,'ter':ter,'defr':defr}, null, json);
+})
+</script>
+</html>
